@@ -1,0 +1,20 @@
+{
+  "name": "news-api-discord",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.2.2",
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "firebase": "^9.15.0",
+    "firebase-admin": "^11.4.1",
+    "node-cron": "^3.0.2"
+  }
+}
