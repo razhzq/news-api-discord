@@ -1,4 +1,3 @@
-const express = require('express');
 const axios = require('axios');
 const cron = require('node-cron');
 
@@ -11,8 +10,28 @@ fs.initializeApp({
 
 const db = fs.firestore();
 
+//discord.js dependencies
+const token = 'MTA2MzE1Mjk5NDMwMjA1MDM1Ng.GFpofG.RTpI7vsthBVWMWDZQLm__VUvcEzcXlOhviZSiQ'
+const {Client, GatewayIntentBits} = require("discord.js");
 
 
+
+
+
+const botInit = (newsString) => {
+
+        const client = new Client({
+                     intents:[
+                        GatewayIntentBits.Guilds,
+                        GatewayIntentBits.GuildMessages
+                            ]
+                       });
+        client.on("ready", () =>{
+               client.channels.cache.get('1010562630844424232').send(newsString)
+               
+            });
+         client.login(token);
+}
 
 
 
@@ -29,13 +48,16 @@ const getNews = async () => {
       for (i=0; i < filteredData.length; i++) {
          for(i=0; i < newsData.length; i++) {
             if (filteredData[i].title !== newsData[i].newsTitle) {
-                const id = filteredData[i].id;
+                const id = String(filteredData[i].id);
                 const newsJson = {
                    newsTitle: filteredData[i].title,
                    url: filteredData[i].url
                 }
                 const newsDb = db.collection('news');
                 const response = await newsDb.doc(id).set(newsJson);
+
+                botInit(filteredData[i].title);
+
             } else {
                 break
             }
