@@ -1,7 +1,8 @@
 const axios = require('axios');
 const cron = require('node-cron');
+require('dotenv').config()
 
-
+// firestore 
 const fs = require('firebase-admin');
 const serviceAccount = require('./admin.json');
 fs.initializeApp({
@@ -11,7 +12,7 @@ fs.initializeApp({
 const db = fs.firestore();
 
 //discord.js dependencies
-const token = 'MTA2MzE1Mjk5NDMwMjA1MDM1Ng.GFpofG.RTpI7vsthBVWMWDZQLm__VUvcEzcXlOhviZSiQ'
+const token = process.env.DISCORD_TOKEN;
 const {Client, GatewayIntentBits} = require("discord.js");
 
 
